@@ -56,7 +56,7 @@ class User:
         claim_type = ClaimType.get_by_name(claim_type_name)
         user_writer.claim_remove_by_claim_type_name_with_value(self._id, claim_type._id, claim_value)
 
-    def claim_edit_by_claim_type_name_with_value(self, claim_type_name, claim_old_value,claim_value):
+    def claim_edit_by_claim_type_name_with_value(self, claim_type_name, claim_old_value, claim_value):
         from pyclaim.domain.aggregates.claim_type.model.claim_type import ClaimType
         claim_type = ClaimType.get_by_name(claim_type_name)
         user_writer.claim_edit_by_claim_type_name_with_value(self._id, claim_type._id, claim_old_value, claim_value)

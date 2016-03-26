@@ -41,6 +41,7 @@ def step_impl(context, user_name):
     context.users[user_name] = user
     context.user_name = user["user_name"]
 
+
 @Given('sysadmin created user "{user_name}" with an user_name and password - user_create')
 def step_impl(context, user_name):
     user_dict = {"user_name": "{}@gmail.com".format(user_name + str(ObjectId())), "password": str(ObjectId())}
@@ -120,6 +121,7 @@ def step_impl(context):
         context.users = {}
     context.users["sysadmin"] = {"token": token, "user_name": Constants.SYSADMIN_USER_NAME, "password": Constants.SYSADMIN_PASS, "id": Constants.SYSADMIN_ID}
     context.user_name = Constants.SYSADMIN_USER_NAME
+
 
 @Given('user "{user_name}" is logged in - login')
 def step_impl(context, user_name):
