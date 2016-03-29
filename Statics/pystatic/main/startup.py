@@ -7,5 +7,5 @@ __author__ = 'Hooman Familrouhani'
 app_mode = os.environ.get('STATICS_CFG_MODE', None)
 
 if app_mode == "dev.cfg" or not app_mode:
-    app = FlaskAppBuilder(aggregates).construct()
+    app = FlaskAppBuilder([aggregates]).construct()
     app.run(host="localhost", port=8083, threaded=True)
