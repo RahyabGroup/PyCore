@@ -20,5 +20,4 @@ class FileUploadValidator(Validation):
         if not self.instance.file["file_content"]:
             super().custom.manual(FileErrorCodes.RESOURCE_CONTENT_IS_EMPTY)
         super().custom.register(self.instance.file["file_name"], FileNameIsInvalid())
-        super().custom.register(self.instance.file["file_name"], FileExtensionNotExist())
         super().validate()

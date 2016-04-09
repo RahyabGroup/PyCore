@@ -27,5 +27,4 @@ class FileReplaceValidator(Validation):
         super().validate()
         file_id = file_info.get_file_name(self.instance.old_file_name)
         super().custom.register(file_id, FileIdNotExist(self.instance.storage_name))
-        super().custom.register(self.instance.new_file["file_name"], FileExtensionNotExist())
         super().validate()
