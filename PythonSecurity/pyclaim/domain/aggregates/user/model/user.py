@@ -1,5 +1,7 @@
+from pyutil.cryptography.rsa.object_coder import ObjectCoder
 from pyclaim.domain.aggregates.user.model.claim import Claim
 from pyclaim.domain.aggregates.user.app.v1_0.rest.assembler import user_writer, user_reader
+from pyclaim.main.config import Config
 
 __author__ = 'Hooman'
 
@@ -23,10 +25,16 @@ class User:
         user_default_claim.value = self.user_name
 
         self.claims.append(user_default_claim)
+        object_coder = ObjectCoder(Config().secret_key)
+        hashed_password = object_coder.encode(self.password)
+        self.password = hashed_password
 
         user_writer.create(self)
 
     def edit(self):
+        object_coder = ObjectCoder(Config().secret_key)
+        hashed_password = object_coder.encode(self.password)
+        self.password = hashed_password
         user_writer.edit_main_info(self)
 
     def remove(self):
@@ -77,7 +85,10 @@ class User:
     def password_change(self, new_password):
         from pyclaim.domain.aggregates.token.model.token import Token
         self.user_name = user_reader.user_name_get_by_id(self._id)
-        user_writer.password_change(self._id, new_password)
+        object_coder = ObjectCoder(Config().secret_key)
+        hashed_password = object_coder.encode(new_password)
+        self.password = hashed_password
+        user_writer.password_change(self._id, self.password)
         Token.remove_by_user_id(self._id)
 
     def claim_exist(self, claim_type_id, claim_value):
@@ -87,7 +98,9 @@ class User:
         return user_reader.claim_id_exist(self._id, claim_id)
 
     def password_exist(self, password):
-        return user_reader.password_exist(self._id, password)
+        object_coder = ObjectCoder(Config().secret_key)
+        hashed_password = object_coder.encode(password)
+        return user_reader.password_exist(self._id, hashed_password)
 
     @staticmethod
     def get_all():
@@ -123,7 +136,9 @@ class User:
 
     @staticmethod
     def get_by_user_name_and_password(user_name, password):
-        user = user_reader.get_by_user_name_and_password(user_name, password)
+        object_coder = ObjectCoder(Config().secret_key)
+        hashed_password = object_coder.encode(password)
+        user = user_reader.get_by_user_name_and_password(user_name, hashed_password)
         return user
 
     @staticmethod
@@ -134,6 +149,8 @@ class User:
     def password_remember(user_name):
         from pyclaim.domain.aggregates.token.model.token import Token
         user = User.get_by_user_name(user_name)
+        object_coder = ObjectCoder(Config().secret_key)
+        user.password = object_coder.decode(user.password)
         Token.remove_by_user_id(user._id)
         return user
 
