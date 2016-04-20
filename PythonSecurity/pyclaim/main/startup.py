@@ -1,4 +1,5 @@
 import os
+from flask.ext.bcrypt import Bcrypt
 
 from pyfacil.web.rest.builder.flask.flask_app_builder import FlaskAppBuilder
 
@@ -34,7 +35,9 @@ def prepare_db():
                 sysadmin = User()
                 sysadmin._id = user_id
                 sysadmin.user_name = sysadmin_user_name
-                sysadmin.password = sysadmin_user_name
+                bcrypt = Bcrypt(None)
+                password_hash = bcrypt.generate_password_hash(sysadmin_user_name)
+                sysadmin.password = password_hash
                 sysadmin_claim = Claim()
                 sysadmin_claim.claim_type_id = role_claim_type._id
                 sysadmin_claim.value = "SYSADMIN"

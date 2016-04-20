@@ -24,8 +24,9 @@ class UserReader(Searcher):
     def password_exist(self, user_id, password):
         return self._collection.reader.is_available({"$and": [{"_id": ObjectId(user_id)}, {"password": password}]})
 
-    def get_by_user_name_and_password(self, user_name, password):
-        return self._collection.reader.find_one({"$and": [{"user_name": user_name}, {"password": password}]})
+    #todo del
+    # def get_by_user_name_and_password(self, user_name, password):
+    #     return self._collection.reader.find_one({"$and": [{"user_name": user_name}, {"password": password}]})
 
     def get_all(self):
         return self._collection.reader.find_many({}, sort={"user_name": 1})

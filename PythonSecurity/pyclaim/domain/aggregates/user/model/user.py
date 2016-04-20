@@ -1,3 +1,5 @@
+from random import randint
+from flask.ext.bcrypt import Bcrypt
 from pyclaim.domain.aggregates.user.model.claim import Claim
 from pyclaim.domain.aggregates.user.app.v1_0.rest.assembler import user_writer, user_reader
 
@@ -23,10 +25,15 @@ class User:
         user_default_claim.value = self.user_name
 
         self.claims.append(user_default_claim)
-
+        bcrypt = Bcrypt(None)
+        password_hash = bcrypt.generate_password_hash(self.password)
+        self.password = password_hash
         user_writer.create(self)
 
     def edit(self):
+        bcrypt = Bcrypt(None)
+        password_hash = bcrypt.generate_password_hash(self.password)
+        self.password = password_hash
         user_writer.edit_main_info(self)
 
     def remove(self):
@@ -77,7 +84,10 @@ class User:
     def password_change(self, new_password):
         from pyclaim.domain.aggregates.token.model.token import Token
         self.user_name = user_reader.user_name_get_by_id(self._id)
-        user_writer.password_change(self._id, new_password)
+        bcrypt = Bcrypt(None)
+        password_hash = bcrypt.generate_password_hash(new_password)
+        self.password = password_hash
+        user_writer.password_change(self._id, password_hash)
         Token.remove_by_user_id(self._id)
 
     def claim_exist(self, claim_type_id, claim_value):
@@ -87,7 +97,11 @@ class User:
         return user_reader.claim_id_exist(self._id, claim_id)
 
     def password_exist(self, password):
-        return user_reader.password_exist(self._id, password)
+        bcrypt = Bcrypt(None)
+        # password_hash = bcrypt.generate_password_hash(password)
+        # return user_reader.password_exist(self._id, password_hash)
+        user = user_reader.get_by_id(self._id)
+        return bcrypt.check_password_hash(user.password, password)
 
     @staticmethod
     def get_all():
@@ -123,8 +137,12 @@ class User:
 
     @staticmethod
     def get_by_user_name_and_password(user_name, password):
-        user = user_reader.get_by_user_name_and_password(user_name, password)
-        return user
+        bcrypt = Bcrypt(None)
+        user = user_reader.get_by_user_name(user_name)
+        if user:
+            if bcrypt.check_password_hash(user.password, password):
+                return user
+        return None
 
     @staticmethod
     def claim_update_value_by_new_value(resource_old_name, resource_new_name):
@@ -134,6 +152,7 @@ class User:
     def password_remember(user_name):
         from pyclaim.domain.aggregates.token.model.token import Token
         user = User.get_by_user_name(user_name)
+        user.password = randint(10000000, 99999999)
         Token.remove_by_user_id(user._id)
         return user
 
