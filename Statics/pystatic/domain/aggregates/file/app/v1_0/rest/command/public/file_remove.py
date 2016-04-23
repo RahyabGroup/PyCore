@@ -1,8 +1,12 @@
+from pystatic.domain.aggregates.file.app.v1_0.rest.command.public.validation.file_remove_validator import \
+    FileRemoveValidator
 from pystatic.domain.aggregates.file.model.file import File
+from pystatic.main.assembler import validator
 
-__author__ = 'H.Rouhani'
+__author__ = 'root'
 
 
+@validator.validation(FileRemoveValidator)
 class FileRemove:
     storage_name = None
     file_name = None

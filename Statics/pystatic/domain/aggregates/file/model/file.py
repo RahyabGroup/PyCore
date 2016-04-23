@@ -40,6 +40,7 @@ class File:
         file_writer(self.storage_name).create(self)
 
     def remove_by_path(self):
+        self._path_create()
         file_writer(self.storage_name).remove_by_path(self.path)
 
     def _persisted_file_name_create(self):

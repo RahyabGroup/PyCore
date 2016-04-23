@@ -8,16 +8,16 @@ __author__ = 'H.Rouhani'
 
 
 @apis.route('/internal/files/<storage_name>/<path>', methods=['GET'])
-def file_path_exist(storage_name, path):
+def request_file_path_exist(storage_name, path):
     dto = {"storage_name": storage_name, "path": path}
     file_exist_reader = FileExist(dto)
     result = file_exist_reader.execute()
     return ok(result)
 
 
-@apis.route('/internal/files/<storage_name>/<path>', methods=['DELETE'])
-def file_remove(storage_name, path):
-    dto = {"storage_name": storage_name, "path": path}
+@apis.route('/internal/files/<storage_name>/<file_name>', methods=['DELETE'])
+def request_file_remove(storage_name, file_name):
+    dto = {"storage_name": storage_name, "file_name": file_name}
     file_remove_command = FileRemove(dto)
     file_remove_command.execute()
     return ok(FileInfoCodes.DONE)

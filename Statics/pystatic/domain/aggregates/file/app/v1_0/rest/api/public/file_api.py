@@ -2,6 +2,7 @@ from flask import request
 from pyfacil.web.rest.flask.response import *
 from pyutil.file import file_info
 from pystatic.domain.aggregates.file.app.v1_0.rest import apis
+from pystatic.domain.aggregates.file.app.v1_0.rest.command.public.file_remove import FileRemove
 
 from pystatic.domain.aggregates.file.app.v1_0.rest.command.public.file_replace import FileReplace
 from pystatic.domain.aggregates.file.app.v1_0.rest.command.public.file_upload import FileUpload
@@ -41,3 +42,11 @@ def file_replace(storage_name, old_file_name):
     file_replace_command.execute()
     return ok(FileInfoCodes.DONE)
 
+
+@apis.route('/files/<storage_name>/<file_name>', methods=['DELETE'])
+@auth.login_required()
+def file_remove(storage_name, file_name):
+    dto = {"storage_name": storage_name, "file_name": file_name}
+    file_remove_command = FileRemove(dto)
+    file_remove_command.execute()
+    return ok(FileInfoCodes.DONE)

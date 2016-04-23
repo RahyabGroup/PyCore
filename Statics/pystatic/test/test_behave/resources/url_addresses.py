@@ -17,6 +17,7 @@ class Url:
 
     FILE_DOWNLOAD_ROUTE = '/files/{}/{}'
     FILE_UPLOAD_ROUTE = '/files/{}'
+    FILE_REMOVE_ROUTE = '/files/{}/{}'
 
     APK_DOWNLOAD_ROUTE = '/apks/{}/{}'
     APK_DOWNLOAD_BY_VERSION_ID_ROUTE = '/apks/{}/download_by_version_id'
