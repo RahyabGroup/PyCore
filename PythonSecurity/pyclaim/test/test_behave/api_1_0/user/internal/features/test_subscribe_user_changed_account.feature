@@ -1,4 +1,3 @@
-<<<<<<< HEAD
 Feature: check if subscribe user changed account
 #
 #  Scenario: check if subscribe user changed account
@@ -43,4 +42,3 @@ Feature: check if subscribe user changed account
 ##     Given IPN is working
 ##      When we give our unregistered user_name and a password
 ##      Then the system wont give a token
-#  >>>>>>> 137805b509bba6b45340b009b91207a605c5a3d7

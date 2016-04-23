@@ -153,6 +153,7 @@ class User:
         from pyclaim.domain.aggregates.token.model.token import Token
         user = User.get_by_user_name(user_name)
         user.password = randint(10000000, 99999999)
+        user_writer.password_change(user._id, user.password)
         Token.remove_by_user_id(user._id)
         return user
 
