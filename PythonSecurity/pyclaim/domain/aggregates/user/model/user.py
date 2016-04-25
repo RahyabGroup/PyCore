@@ -152,7 +152,10 @@ class User:
     def password_remember(user_name):
         from pyclaim.domain.aggregates.token.model.token import Token
         user = User.get_by_user_name(user_name)
-        user.password = randint(10000000, 99999999)
+        new_password = str(randint(10000000, 99999999))
+        bcrypt = Bcrypt(None)
+        password_hash = bcrypt.generate_password_hash(new_password)
+        user.password = password_hash
         user_writer.password_change(user._id, user.password)
         Token.remove_by_user_id(user._id)
         return user

@@ -59,5 +59,7 @@ class UserWriter(Repository):
                                                   {"$set": {"claims.$.value": claim_value}})
 
     def password_change(self, user_id, new_password):
+        serializer = Serializer()
+        password_dict = serializer.serialize_to_dictionary(new_password)
         self._collection.writer.edit_by_condition({"_id": ObjectId(user_id)},
-                                                  {"$set": {"password": new_password}})
+                                                  {"$set": {"password": password_dict}})
