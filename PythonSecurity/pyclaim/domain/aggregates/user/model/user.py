@@ -155,8 +155,8 @@ class User:
         new_password = str(randint(10000000, 99999999))
         bcrypt = Bcrypt(None)
         password_hash = bcrypt.generate_password_hash(new_password)
-        user.password = password_hash
-        user_writer.password_change(user._id, user.password)
+        user.password = new_password
+        user_writer.password_change(user._id, password_hash)
         Token.remove_by_user_id(user._id)
         return user
 
