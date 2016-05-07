@@ -11,5 +11,5 @@ class PasswordRememberContainer(Validation):
         self.instance = instance
 
     def execute(self):
-        super().custom.register(self.instance.query_string["user_name"], UserWithUserNameNotExist())
+        super().custom.register(self.instance.query_string["user_name"].lower(), UserWithUserNameNotExist())
         super().validate()

@@ -16,6 +16,6 @@ class PasswordRemember:
         self.__dict__.update(dto)
 
     def execute(self):
-        user = User.password_remember(self.query_string["user_name"])
+        user = User.password_remember(self.query_string["user_name"].lower())
         user_id_password_detail = UserIdPasswordDetail.create_from_user(user)
         return user_id_password_detail

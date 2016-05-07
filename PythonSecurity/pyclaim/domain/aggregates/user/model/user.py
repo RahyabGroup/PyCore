@@ -98,8 +98,6 @@ class User:
 
     def password_exist(self, password):
         bcrypt = Bcrypt(None)
-        # password_hash = bcrypt.generate_password_hash(password)
-        # return user_reader.password_exist(self._id, password_hash)
         user = user_reader.get_by_id(self._id)
         return bcrypt.check_password_hash(user.password, password)
 
