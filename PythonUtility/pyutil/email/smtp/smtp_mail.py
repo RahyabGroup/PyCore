@@ -21,7 +21,9 @@ class SmtpMail:
         """message_type could be plain, html, xml"""
         try:
             message = MIMEText(content, message_type)
-            message['Subject']= subject
+            message['Subject'] = subject
+            message['From'] = sender
+            message['To'] = str(receivers)
             smtp = SMTP(self.host, self.port)
             if self.user_name and self.password:
                 smtp.login(self.user_name, self.password)
