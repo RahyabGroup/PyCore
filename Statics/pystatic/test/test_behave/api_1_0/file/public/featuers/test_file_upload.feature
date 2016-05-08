@@ -27,21 +27,7 @@ Feature: as a user I can upload an image file to server
     | IMAGE_FILE_BINARY_jpg    | picture6     | jpg              |
     | IMAGE_FILE_BINARY_JPEG   | picture7     | JPEG             |
     | IMAGE_FILE_BINARY_jpeg   | picture8     | jpeg             |
-    | IMAGE_FILE_BINARY_jpeg   | عکس ۹        | jpeg             |
-
-#
-#  Scenario Outline: as a registered user we cant upload an invalid image to server
-#    Given we are logged in as sysadmin - login
-#    Given sysadmin registered a user with a user_name and password - user_create
-#    Given we are logged in with the user_name and password - login
-#    When we upload an "<image_file>" file as "<image_name>"."<image_extension>" - file_upload
-#    Then the file wont be uploaded
-#    Examples:
-#    | image_file               | image_name   | image_extension  |
-#    | IMAGE_FILE_BINARY_BMP    | picture1     | BMP              |
-#    | IMAGE_FILE_BINARY_bmp    | picture2     | bmp              |
-#    | TEXT_FILE_BINARY_txt     | picture3     | txt              |
-#    | IMAGE_FILE_EMPTY         | picture8     | jpeg             |
+#    | IMAGE_FILE_BINARY_jpeg   | عکس ۹        | jpeg             |
 
 
   Scenario Outline: as a registered user we can upload an duplicate image to server
@@ -89,6 +75,11 @@ Feature: as a user I can upload an image file to server
     Then the file wont be uploaded for not authenticated user
 
 
+  Scenario: sysadmin can upload an image to server
+    Given we are logged in as sysadmin - login
+    When we upload a file as sysadmin - file_upload
+    Then the file will be uploaded successfully
+
 #  Scenario: a deactivated user can upload an image
 #    Given we are logged in as sysadmin - login
 #    Given sysadmin registered a user with a user_name and password - user_create
@@ -97,11 +88,20 @@ Feature: as a user I can upload an image file to server
 #    When we upload a file - file_upload
 #    Then the file will be uploaded successfully
 
-  Scenario: sysadmin can upload an image to server
-    Given we are logged in as sysadmin - login
-    When we upload a file as sysadmin - file_upload
-    Then the file will be uploaded successfully
 
+#
+#  Scenario Outline: as a registered user we cant upload an invalid image to server
+#    Given we are logged in as sysadmin - login
+#    Given sysadmin registered a user with a user_name and password - user_create
+#    Given we are logged in with the user_name and password - login
+#    When we upload an "<image_file>" file as "<image_name>"."<image_extension>" - file_upload
+#    Then the file wont be uploaded
+#    Examples:
+#    | image_file               | image_name   | image_extension  |
+#    | IMAGE_FILE_BINARY_BMP    | picture1     | BMP              |
+#    | IMAGE_FILE_BINARY_bmp    | picture2     | bmp              |
+#    | TEXT_FILE_BINARY_txt     | picture3     | txt              |
+#    | IMAGE_FILE_EMPTY         | picture8     | jpeg             |
 
 #  todo: farsi storage name
 

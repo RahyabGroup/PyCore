@@ -82,6 +82,7 @@ def step_impl(context):
 def step_impl(context):
     result = context.result
     message = ResponseReader.get_body(result)
+    print(message)
     assert result.status_code == ResponseStatusCodes.POST_SUCCESS
 
 
@@ -89,6 +90,7 @@ def step_impl(context):
 def step_impl(context):
     result = context.result
     message = ResponseReader.get_body(result)
+    print(message)
     assert result.status_code == ResponseStatusCodes.BAD_REQUEST_ERROR
 
 
@@ -103,4 +105,5 @@ def step_impl(context):
 def step_impl(context):
     result = context.result
     message = ResponseReader.get_body(result)
+    print(message)
     assert result.status_code == ResponseStatusCodes.NOT_AUTHENTICATED_ERROR

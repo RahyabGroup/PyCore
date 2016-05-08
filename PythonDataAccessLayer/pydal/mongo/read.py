@@ -44,8 +44,10 @@ class ReadCommand:
             fields.append("py/object")
             aggregate_query.append({"$project": dict.fromkeys(fields, 1)})
         aggregate_query.append({"$sort": sort})
-        aggregate_query.append({"$skip": skip})
-        aggregate_query.append({"$limit": take})
+        if skip:
+            aggregate_query.append({"$skip": skip})
+        if take:
+            aggregate_query.append({"$limit": take})
         documents = self._mongo_collection.aggregate(aggregate_query, useCursor=False)
         return self._get_results(documents)
 
@@ -73,5 +75,8 @@ class ReadCommand:
             json_deserializer = Deserializer()
             json_deserializer.add_backend("bson.json_util")
             result = json_deserializer.deserialize_from_dictionary(document)
-            result._id = str(result._id)
+            if isinstance(result, dict):
+                result["_id"] = str(result["_id"])
+            else:
+                result._id = str(result._id)
         return result
