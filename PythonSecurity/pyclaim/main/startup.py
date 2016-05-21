@@ -4,6 +4,7 @@ from flask.ext.bcrypt import Bcrypt
 from pyfacil.web.rest.builder.flask.flask_app_builder import FlaskAppBuilder
 
 from pyclaim.domain import aggregates
+from pyclaim.main.config import Config
 
 __author__ = 'H.Rouhani'
 
@@ -54,6 +55,6 @@ def prepare_db():
 
 
 if app_mode == "dev.cfg" or not app_mode:
-    app = FlaskAppBuilder([aggregates]).construct()
+    app = FlaskAppBuilder([aggregates], log_path=Config().log_path).construct()
     prepare_db()
     app.run(host="localhost", port=8081, threaded=True)
