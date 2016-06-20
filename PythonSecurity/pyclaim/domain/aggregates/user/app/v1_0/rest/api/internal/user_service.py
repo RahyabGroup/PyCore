@@ -44,65 +44,66 @@ def request_user_get_by_id(user_id):
     result = request_user_get_by_id_reader.execute()
     return ok(result)
 
-
-@apis.route('/internal/user/<user_id>/claims/add_by_claim_type_name', methods=['PATCH'])
-def request_user_claim_add_by_claim_type_name(user_id):
-    dto = request.get_json()
-    dto["user_id"] = user_id
-    request_user_claim_add_by_claim_type_name_command = RequestUserClaimAddByClaimTypeName(dto)
-    request_user_claim_add_by_claim_type_name_command.execute()
-    return ok(None, UserInfoCodes.DONE)
-
-
-@apis.route('/internal/user/<user_id>/claims/edit_by_claim_type_name_and_value', methods=['PATCH'])
-def request_user_claim_edit_by_claim_type_name_and_value(user_id):
-    dto = request.get_json()
-    dto["user_id"] = user_id
-    request_user_claim_edit_by_claim_type_name_and_value_command = RequestUserClaimEditByClaimTypeNameAndValue(dto)
-    request_user_claim_edit_by_claim_type_name_and_value_command.execute()
-    return ok(None, UserInfoCodes.DONE)
-
-
-@apis.route('/internal/user/<user_id>/claims/remove_by_claim_type_name_and_value', methods=['PATCH'])
-def request_user_claim_remove_by_claim_type_name_and_value(user_id):
-    dto = request.get_json()
-    dto["user_id"] = user_id
-    request_user_claim_remove_by_claim_type_name_and_value_command = RequestUserClaimRemoveByClaimTypeNameAndValue(dto)
-    request_user_claim_remove_by_claim_type_name_and_value_command.execute()
-    return ok(None, UserInfoCodes.DONE)
-
-
-@apis.route('/internal/user/<user_id>/claims/get_by_claim_type_name', methods=['GET'])
-def request_user_claim_get_by_claim_type_name(user_id):
-    query_string = request.args
-    dto = {"user_id": user_id, "query_string": query_string}
-    request_user_claim_get_by_claim_type_name_query = RequestUserClaimGetByClaimTypeName(dto)
-    result = request_user_claim_get_by_claim_type_name_query.execute()
-    return ok(result)
-
-
-@apis.route('/internal/users/claims/resources', methods=['PUT'])
-def subscribe_resource_changed_user():
-    dto = request.get_json()
-    resource_changed_user_command = ResourceChangedUser(dto)
-    resource_changed_user_command.execute()
-    return ok(UserInfoCodes.DONE)
-
-
-@apis.route('/internal/users/claims/resources', methods=['DELETE'])
-def subscribe_resource_removed_user():
-    dto = request.get_json()
-    resource_removed_user_command = ResourceRemovedUser(dto)
-    resource_removed_user_command.execute()
-    return ok(UserInfoCodes.DONE)
-
-
-@apis.route('/internal/users/claims/claim_types/<claim_type_id>', methods=['DELETE'])
-def subscribe_claim_type_removed_user(claim_type_id):
-    dto = {"claim_type_id": claim_type_id}
-    claim_type_removed_user_command = ClaimTypeRemovedUser(dto)
-    claim_type_removed_user_command.execute()
-    return ok(UserInfoCodes.DONE)
+# todo : refactor: remove services and move func calls to relevant places
+#
+# @apis.route('/internal/user/<user_id>/claims/add_by_claim_type_name', methods=['PATCH'])
+# def request_user_claim_add_by_claim_type_name(user_id):
+#     dto = request.get_json()
+#     dto["user_id"] = user_id
+#     request_user_claim_add_by_claim_type_name_command = RequestUserClaimAddByClaimTypeName(dto)
+#     request_user_claim_add_by_claim_type_name_command.execute()
+#     return ok(None, UserInfoCodes.DONE)
+#
+#
+# @apis.route('/internal/user/<user_id>/claims/edit_by_claim_type_name_and_value', methods=['PATCH'])
+# def request_user_claim_edit_by_claim_type_name_and_value(user_id):
+#     dto = request.get_json()
+#     dto["user_id"] = user_id
+#     request_user_claim_edit_by_claim_type_name_and_value_command = RequestUserClaimEditByClaimTypeNameAndValue(dto)
+#     request_user_claim_edit_by_claim_type_name_and_value_command.execute()
+#     return ok(None, UserInfoCodes.DONE)
+#
+#
+# @apis.route('/internal/user/<user_id>/claims/remove_by_claim_type_name_and_value', methods=['PATCH'])
+# def request_user_claim_remove_by_claim_type_name_and_value(user_id):
+#     dto = request.get_json()
+#     dto["user_id"] = user_id
+#     request_user_claim_remove_by_claim_type_name_and_value_command = RequestUserClaimRemoveByClaimTypeNameAndValue(dto)
+#     request_user_claim_remove_by_claim_type_name_and_value_command.execute()
+#     return ok(None, UserInfoCodes.DONE)
+#
+#
+# @apis.route('/internal/user/<user_id>/claims/get_by_claim_type_name', methods=['GET'])
+# def request_user_claim_get_by_claim_type_name(user_id):
+#     query_string = request.args
+#     dto = {"user_id": user_id, "query_string": query_string}
+#     request_user_claim_get_by_claim_type_name_query = RequestUserClaimGetByClaimTypeName(dto)
+#     result = request_user_claim_get_by_claim_type_name_query.execute()
+#     return ok(result)
+#
+#
+# @apis.route('/internal/users/claims/resources', methods=['PUT'])
+# def subscribe_resource_changed_user():
+#     dto = request.get_json()
+#     resource_changed_user_command = ResourceChangedUser(dto)
+#     resource_changed_user_command.execute()
+#     return ok(UserInfoCodes.DONE)
+#
+#
+# @apis.route('/internal/users/claims/resources', methods=['DELETE'])
+# def subscribe_resource_removed_user():
+#     dto = request.get_json()
+#     resource_removed_user_command = ResourceRemovedUser(dto)
+#     resource_removed_user_command.execute()
+#     return ok(UserInfoCodes.DONE)
+#
+#
+# @apis.route('/internal/users/claims/claim_types/<claim_type_id>', methods=['DELETE'])
+# def subscribe_claim_type_removed_user(claim_type_id):
+#     dto = {"claim_type_id": claim_type_id}
+#     claim_type_removed_user_command = ClaimTypeRemovedUser(dto)
+#     claim_type_removed_user_command.execute()
+#     return ok(UserInfoCodes.DONE)
 
 
 @apis.route('/internal/register', methods=['POST'])
