@@ -35,3 +35,7 @@ class Config(SingletonConfig):
         level = self._parser.section('app_conf').option('log_level').string_get()
         level = logging._nameToLevel.get(level, logging.DEBUG)
         return level
+
+    @property
+    def ipn_url(self):
+        return self._parser.section('app_conf').option('ipn_url').string_get()

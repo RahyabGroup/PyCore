@@ -3,7 +3,7 @@ Feature: a user can subscribe for notification (SSE) with user Id and message ty
 
   Scenario Outline: a registered user can subscribe for notifications with user Id and message type
     Given we are logged in as sysadmin - login
-    Given sysadmin registered user "<userX>" with an email and password - user_create
+    Given sysadmin registered user "<userX>" with a user_name and password - user_create
     Given user "<userX>" is logged in - login
     Given we sent a push notification to the user "<userX>" with type "<message_type>" - push
     When user "<userX>" subscribes for notifications with type "<message_type>" from server - subscribe

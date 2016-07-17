@@ -9,8 +9,8 @@ import requests
 
 @when('we send a push notification to the user "{username}" with type "{message_type}" - push')
 def step_impl(context, username, message_type):
-    dto = {"receiver_ids": [context.users[username]["id"]], "message_type": message_type, "data": "notify of new something"}
-    # dto = {"receiver_ids": ['569266273ae72820009335ee'], "message_type": 'wall-post', "data": "notify of new something"}
+    # dto = {"receiver_ids": [context.users[username]["id"]], "message_type": message_type, "data": "notify of new something"}
+    dto = {"receiver_ids": ['578b8c0de432251528fbb2b8'], "message_type": 'wall-post', "data": "notify of new something"}
     result = requests.post('{}{}'.format(Url.DOMAIN_ADDRESS, Url.PUSH_ROUTE), json=dto)
     context.result = result
     print(result)

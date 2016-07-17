@@ -48,3 +48,36 @@ def notification_mark_as_viewed(notification_id):
     notification_mark_as_viewed_command = NotificationMarkAsViewed(dto)
     notification_mark_as_viewed_command.execute()
     return ok(NotificationInfoCodes.DONE)
+
+
+@apis.route("/notification/")
+def index():
+    debug_template = """
+     <html>
+       <head>
+       </head>
+       <body>
+         <h1>Server sent events</h1>
+
+         <div id="event"></div>
+
+         <input type="text" name="user_id" value="578b8c0de432251528fbb2b8">
+         <input type="text" name="message_type" value="wall-post">
+
+         <script type="text/javascript" >
+         var eventOutputContainer = document.getElementById("event");
+         str1 = "http://localhost:8084/api/v1.0/notification/";
+         str2 = document.getElementsByName('user_id')[0].value;
+         str3 = document.getElementsByName('message_type')[0].value;
+         str4 = str1.concat(str2).concat("/").concat(str3);
+         var evtSrc = new EventSource(str4);
+
+         evtSrc.onmessage = function(e) {
+             console.log(e.data);
+             eventOutputContainer.innerHTML = e.data;
+         };
+         </script>
+       </body>
+     </html>
+    """
+    return (debug_template)
