@@ -61,7 +61,7 @@ def index():
 
          <div id="event"></div>
 
-         <input type="text" name="user_id" value="578b8c0de432251528fbb2b8">
+         <input type="text" name="user_id" value='560121abcbf62c13d4567f0d'>
          <input type="text" name="message_type" value="wall-post">
 
          <script type="text/javascript" >
