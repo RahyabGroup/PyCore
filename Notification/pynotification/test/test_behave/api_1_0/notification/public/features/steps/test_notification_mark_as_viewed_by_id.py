@@ -5,11 +5,11 @@ from pynotification.test.test_behave.resources.response_status_codes import Resp
 from pynotification.test.test_behave.resources.url_addresses import Url
 
 
-@when('we change the notification status to read as user "{username}" _ notification_mark_as_viewed')
+@when('we change the notification status to read as user "{username}" _ notification_mark_as_viewed_by_id')
 def step_impl(context, username):
     headers = {"token": context.users[username]["token"]}
     result = requests.put("{}{}".format(Url.DOMAIN_ADDRESS,
-                                        Url.NOTIFICATION_MARK_AS_VIEWED_ROUTE.format(context.notification_id)),
+                                        Url.NOTIFICATION_MARK_AS_VIEWED_BY_ID_ROUTE.format(context.notification_id)),
                                         headers=headers)
     print(result)
     context.result = result
@@ -21,11 +21,12 @@ def step_impl(context):
 
 
 @when(
-    'we change the notification status to read as user "{username}" with empty notification id _ notification_mark_as_viewed')
+    'we change the notification status to read as user "{username}" with empty notification id _ '
+    'notification_mark_as_viewed_by_id')
 def step_impl(context, username):
     headers = {"token": context.users[username]["token"]}
     result = requests.put("{}{}".format(Url.DOMAIN_ADDRESS,
-                                        Url.NOTIFICATION_MARK_AS_VIEWED_ROUTE.format("   "))
+                                        Url.NOTIFICATION_MARK_AS_VIEWED_BY_ID_ROUTE.format("   "))
                           , headers=headers)
     print(result)
     context.result = result
@@ -37,11 +38,12 @@ def step_impl(context):
 
 
 @when(
-    'we change the notification status to read as user "{username}" with invalid notification id _ notification_mark_as_viewed')
+    'we change the notification status to read as user "{username}" with invalid notification id _ '
+    'notification_mark_as_viewed_by_id')
 def step_impl(context, username):
     headers = {"token": context.users[username]["token"]}
     result = requests.put("{}{}".format(Url.DOMAIN_ADDRESS,
-                                        Url.NOTIFICATION_MARK_AS_VIEWED_ROUTE.format(context.users[username]["id"]))
+                                        Url.NOTIFICATION_MARK_AS_VIEWED_BY_ID_ROUTE.format(context.users[username]["id"]))
                           , headers=headers)
     print(result)
     context.result = result

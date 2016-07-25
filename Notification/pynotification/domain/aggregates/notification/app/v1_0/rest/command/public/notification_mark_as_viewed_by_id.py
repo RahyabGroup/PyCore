@@ -7,7 +7,7 @@ __author__ = 'root'
 
 
 @validator.validation(NotificationMarkAsViewedValidator)
-class NotificationMarkAsViewed:
+class NotificationMarkAsViewedById:
     notification_id = None
 
     def __init__(self, dto):
@@ -17,4 +17,4 @@ class NotificationMarkAsViewed:
         notification = Notification()
         notification.view_status = 1
         notification._id = self.notification_id
-        notification.mark_as_viewed()
+        notification.mark_as_viewed_by_id()

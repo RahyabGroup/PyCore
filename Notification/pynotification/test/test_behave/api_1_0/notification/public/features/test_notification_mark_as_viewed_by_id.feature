@@ -7,7 +7,7 @@ Feature: after viewing a notification by user, it's status should change to view
     Given user "<userX>" is logged in - login
     Given we sent a push notification to the user "<userX>" with type "<message_type>" - push
     When we get the notification of user "<userX>" with type "<message_type>" - notification_get_by_receiver_id
-    When we change the notification status to read as user "<userX>" _ notification_mark_as_viewed
+    When we change the notification status to read as user "<userX>" _ notification_mark_as_viewed_by_id
     Then the notification status will change successfully
     Examples:
     | userX    | message_type   |
@@ -20,7 +20,7 @@ Feature: after viewing a notification by user, it's status should change to view
     Given user "<userX>" is logged in - login
     Given we sent a push notification to the user "<userX>" with type "<message_type>" - push
     When we get the notification of user "<userX>" with type "<message_type>" - notification_get_by_receiver_id
-    When we change the notification status to read as user "<userX>" with empty notification id _ notification_mark_as_viewed
+    When we change the notification status to read as user "<userX>" with empty notification id _ notification_mark_as_viewed_by_id
     Then the notification status wont change
     Examples:
       | userX | message_type  |
@@ -33,7 +33,7 @@ Feature: after viewing a notification by user, it's status should change to view
     Given user "<userX>" is logged in - login
     Given we sent a push notification to the user "<userX>" with type "<message_type>" - push
     When we get the notification of user "<userX>" with type "<message_type>" - notification_get_by_receiver_id
-    When we change the notification status to read as user "<userX>" with invalid notification id _ notification_mark_as_viewed
+    When we change the notification status to read as user "<userX>" with invalid notification id _ notification_mark_as_viewed_by_id
     Then the notification status wont change
     Examples:
       | userX | message_type  |
@@ -42,13 +42,13 @@ Feature: after viewing a notification by user, it's status should change to view
 
   Scenario Outline: a registered user cant mark another persons notification as viewed
     Given we are logged in as sysadmin - login
-    Given sysadmin registered user "<userX>" with an email and password - user_create
+    Given sysadmin registered user "<userX>" with a user_name and password - user_create
     Given user "<userX>" is logged in - login
-    Given sysadmin registered user "<userY>" with an email and password - user_create
+    Given sysadmin registered user "<userY>" with a user_name and password - user_create
     Given user "<userY>" is logged in - login
     Given we sent a push notification to the user "<userX>" with type "<message_type>" - push
     When we get the notification of user "<userX>" with type "<message_type>" - notification_get_by_receiver_id
-    When we change the notification status to read as user "<userY>" _ notification_mark_as_viewed
+    When we change the notification status to read as user "<userY>" _ notification_mark_as_viewed_by_id
     Then the notification status wont change
     Examples:
       | userX | userY | message_type  |

@@ -1,7 +1,9 @@
 from pyfacil.web.rest.flask.response import *
 from pynotification.domain.aggregates.notification.app.v1_0.rest import apis
-from pynotification.domain.aggregates.notification.app.v1_0.rest.command.public.notification_mark_as_viewed import \
-    NotificationMarkAsViewed
+from pynotification.domain.aggregates.notification.app.v1_0.rest.command.public.notification_mark_as_viewed_by_id import \
+    NotificationMarkAsViewedById
+from pynotification.domain.aggregates.notification.app.v1_0.rest.command.public.notification_mark_as_viewed_by_message_type import \
+    NotificationMarkAsViewedByMessageType
 from pynotification.domain.aggregates.notification.app.v1_0.rest.query.public.notification_count_get_by_receiver_id import \
     NotificationCountGetByReceiverId
 from pynotification.domain.aggregates.notification.app.v1_0.rest.query.public.notification_get_by_receiver_id import \
@@ -41,12 +43,21 @@ def notification_count_get_by_receiver_id(receiver_id, message_type):
     return ok(notification_count)
 
 
-@apis.route('/notification/<notification_id>', methods=["PUT"])
+@apis.route('/notification/mark_as_viewed_by_id/<notification_id>', methods=["PUT"])
 @auth.login_required()
-def notification_mark_as_viewed(notification_id):
+def notification_mark_as_viewed_by_id(notification_id):
     dto = {"notification_id": notification_id}
-    notification_mark_as_viewed_command = NotificationMarkAsViewed(dto)
-    notification_mark_as_viewed_command.execute()
+    notification_mark_as_viewed_by_id_command = NotificationMarkAsViewedById(dto)
+    notification_mark_as_viewed_by_id_command.execute()
+    return ok(NotificationInfoCodes.DONE)
+
+
+@apis.route('/notification/mark_as_viewed_by_message_type/<message_type>', methods=["PUT"])
+@auth.login_required()
+def notification_mark_as_viewed_by_message_type(message_type):
+    dto = {"message_type": message_type}
+    notification_mark_as_viewed_by_message_type_command = NotificationMarkAsViewedByMessageType(dto)
+    notification_mark_as_viewed_by_message_type_command.execute()
     return ok(NotificationInfoCodes.DONE)
 
 
@@ -62,7 +73,7 @@ def index():
          <div id="event"></div>
 
          <input type="text" name="user_id" value='560121abcbf62c13d4567f0d'>
-         <input type="text" name="message_type" value="wall-post">
+         <input type="text" name="message_type" value="new-message">
 
          <script type="text/javascript" >
          var eventOutputContainer = document.getElementById("event");

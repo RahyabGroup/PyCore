@@ -35,17 +35,10 @@ class Url:
     IPN_DOMAIN_PERSON_CREATE_ROUTE = "/persons"
 
 
-    IPN_DOMAIN_PERSON_GET_BY_ID_ROUTE = "/persons/{}"
-    IPN_DOMAIN_BASIC_INFO_CREATE_ROUTE = "/persons/{}"
-    IPN_DOMAIN_BASIC_INFO_EDIT_ROUTE = "/persons/{}"
-    IPN_DOMAIN_COMPANY_TYPE_CREATE_ROUTE = '/company_types'
-    IPN_DOMAIN_COMPANY_SIZE_CREATE_ROUTE = '/company_sizes'
-    IPN_DOMAIN_COMPANY_INDUSTRY_CREATE_ROUTE = '/company_industries'
-    IPN_DOMAIN_COMPANY_OPERATION_CREATE_ROUTE = '/company_operations'
-
     PUSH_ROUTE = '/internal/notification'
     SUBSCRIBE_ROUTE = '/notification/{}/{}'
     NOTIFICATION_GET_BY_RECEIVER_ID_ROUTE = '/notification/receiver/{}/message_type/{}'      #'/notification/{}'
     NOTIFICATION_COUNT_GET_BY_RECEIVER_ID_ROUTE = '/notification/receiver/{}/message_type/{}/count'      #'/notification/{}/count'
-    NOTIFICATION_MARK_AS_VIEWED_ROUTE = '/notification/{}'
+    NOTIFICATION_MARK_AS_VIEWED_BY_ID_ROUTE = '/notification/mark_as_viewed_by_id/{}'
+    NOTIFICATION_MARK_AS_VIEWED_BY_MESSAGE_TYPE_ROUTE = '/notification/mark_as_viewed_by_message_type/{}'
     NOTIFICATION_SUBSCRIBE = '/notification/{}/{}'

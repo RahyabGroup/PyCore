@@ -40,8 +40,13 @@ class Notification:
     def receiver_exists(notification_id, receiver_id):
         return notification_reader.receiver_exists(notification_id, receiver_id)
 
+    @staticmethod
+    def mark_as_viewed_by_message_type(receiver_id, message_type):
+        notification_writer.view_status_change_by_receiver_id_message_type(receiver_id, message_type,
+                                                                           NotificationViewStatus.viewed)
+
     def create(self):
         notification_writer.create(self)
 
-    def mark_as_viewed(self):
-        notification_writer.view_status_change(self._id, NotificationViewStatus.viewed)
+    def mark_as_viewed_by_id(self):
+        notification_writer.view_status_change_by_id(self._id, NotificationViewStatus.viewed)
