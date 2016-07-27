@@ -22,5 +22,5 @@ class NotificationGetByReceiverId:
         query_string_info = QueryStringInfo()
         query_string_info.load(self.query_string)
         notifications = Notification.notification_get_by_receiver_id(self.receiver_id, self.message_type, query_string_info.skip,
-                                                                 query_string_info.take, query_string_info.sort)
+                                                                     query_string_info.take, query_string_info.sort)
         return NotificationDetail.create_from_notifications(notifications)
