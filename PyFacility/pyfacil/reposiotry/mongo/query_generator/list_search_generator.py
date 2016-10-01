@@ -12,6 +12,8 @@ class ListSearchGenerator:
         self.list_items_type = list_items_type
 
     def generate(self, value):
-        if TypeParser.try_parse(value, self.list_items_type):
-            return {self.field_name: {"$in": list([self.list_items_type(value)])}}
+        if TypeParser.try_parse(value, list):
+            return {self.field_name: {"$in": value}}
+        elif TypeParser.try_parse(value, self.list_items_type):
+                return {self.field_name: {"$in": list([self.list_items_type(value)])}}
         return None
