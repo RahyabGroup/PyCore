@@ -14,7 +14,7 @@ class StringSearchGenerator:
     def generate(self, value):
         if not self.split_string:
             return {self.field_name: {'$regex': '.*{}.*'.format(value),
-                                       '$options': '-i'}}
+                                      '$options': '-i'}}
         else:
             text_criteria = {"${}".format(self.string_splitter_operator): []}
             for txt in value.split(" "):
