@@ -5,7 +5,7 @@ import logging
 
 from flask import Flask
 
-from flask.ext.cors import CORS
+from flask_cors import CORS
 
 from pyfacil.web.rest.builder.app_builder import AppBuilder
 from pyfacil.web.rest.flask.response import main_handler

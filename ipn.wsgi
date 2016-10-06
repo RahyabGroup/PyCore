@@ -2,7 +2,7 @@ import sys
 sys.path.insert(0, '/var/www/ipn.ir/web/IPN-Core')
 sys.path.insert(0, '/var/www/ipn.ir/web/IPN-App/IPN')
 import os
-from flask.ext.cors import CORS
+from flask_cors import CORS
 
 from atistancube.ipn.app import create_app
 

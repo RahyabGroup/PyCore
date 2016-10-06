@@ -8,7 +8,7 @@ import os
 os.environ["SECURITY_CONFIG"] = "pysecurityprodcfg"
 
 from pyclaim.app import create_app
-from flask.ext.cors import CORS
+from flask_cors import CORS
 
 __author__ = 'Hooman'
 
