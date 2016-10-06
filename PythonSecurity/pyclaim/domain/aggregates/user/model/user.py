@@ -1,5 +1,5 @@
 from random import randint
-from flask.ext.bcrypt import Bcrypt
+from flask_bcrypt import Bcrypt
 from pyclaim.domain.aggregates.user.model.claim import Claim
 from pyclaim.domain.aggregates.user.app.v1_0.rest.assembler import user_writer, user_reader
 

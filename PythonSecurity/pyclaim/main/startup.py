@@ -1,6 +1,5 @@
 import os
-from flask.ext.bcrypt import Bcrypt
-
+from flask_bcrypt import Bcrypt
 from pyfacil.web.rest.builder.flask.flask_app_builder import FlaskAppBuilder
 
 from pyclaim.domain import aggregates
