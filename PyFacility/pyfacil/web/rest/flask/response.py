@@ -87,7 +87,7 @@ def _response_get(data, meta=None, is_error=False):
 
 
 def _response_set_detail_access(response):
-    # response.headers['Access-Control-Allow-Origin'] = 'http://localhost:63343'
+    response.headers['Access-Control-Allow-Origin'] = '*'   #'http://localhost:63343'
     response.headers['Access-Control-Expose-Headers'] = 'token'
     # response.headers['Access-Control-Allow-Methods'] = 'POST, OPTIONS, GET, PUT, DELETE'
     # response.headers['Access-Control-Allow-Headers'] = 'true'
