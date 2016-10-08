@@ -20,9 +20,9 @@ from flask import request, Response
 @apis.route('/notification/<receiver_id>/<message_type>', methods=['GET'])
 def subscribe(receiver_id, message_type):
     dto = {'receiver_id': receiver_id, 'message_type': message_type}
+    headers = {'Access-Control-Allow-Origin': '*'}
     subscribe_command = Subscribe(dto)
-    response = Response(subscribe_command.execute(), mimetype="text/event-stream", status=200)
-    response.headers['Access-Control-Allow-Origin'] = '*'
+    response = Response(subscribe_command.execute(), mimetype="text/event-stream", status=200, headers=headers)
     return response
 
 
