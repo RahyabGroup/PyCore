@@ -22,6 +22,7 @@ def subscribe(receiver_id, message_type):
     dto = {'receiver_id': receiver_id, 'message_type': message_type}
     subscribe_command = Subscribe(dto)
     response = Response(subscribe_command.execute(), mimetype="text/event-stream", status=200)
+    response.headers['Access-Control-Allow-Origin'] = '*'
     return response
 
 
@@ -61,34 +62,34 @@ def notification_mark_as_viewed_by_message_type(message_type):
     return ok(NotificationInfoCodes.DONE)
 
 
-@apis.route("/notification/")
-def index():
-    debug_template = """
-     <html>
-       <head>
-       </head>
-       <body>
-         <h1>Server sent events</h1>
-
-         <div id="event"></div>
-
-         <input type="text" name="user_id" value='560121abcbf62c13d4567f0d'>
-         <input type="text" name="message_type" value="new-message">
-
-         <script type="text/javascript" >
-         var eventOutputContainer = document.getElementById("event");
-         str1 = "http://localhost:8084/api/v1.0/notification/";
-         str2 = document.getElementsByName('user_id')[0].value;
-         str3 = document.getElementsByName('message_type')[0].value;
-         str4 = str1.concat(str2).concat("/").concat(str3);
-         var evtSrc = new EventSource(str4);
-
-         evtSrc.onmessage = function(e) {
-             console.log(e.data);
-             eventOutputContainer.innerHTML = e.data;
-         };
-         </script>
-       </body>
-     </html>
-    """
-    return (debug_template)
+# @apis.route("/notification/")
+# def index():
+#     debug_template = """
+#      <html>
+#        <head>
+#        </head>
+#        <body>
+#          <h1>Server sent events</h1>
+#
+#          <div id="event"></div>
+#
+#          <input type="text" name="user_id" value='560121abcbf62c13d4567f0d'>
+#          <input type="text" name="message_type" value="new-message">
+#
+#          <script type="text/javascript" >
+#          var eventOutputContainer = document.getElementById("event");
+#          str1 = "http://localhost:8084/api/v1.0/notification/";
+#          str2 = document.getElementsByName('user_id')[0].value;
+#          str3 = document.getElementsByName('message_type')[0].value;
+#          str4 = str1.concat(str2).concat("/").concat(str3);
+#          var evtSrc = new EventSource(str4);
+#
+#          evtSrc.onmessage = function(e) {
+#              console.log(e.data);
+#              eventOutputContainer.innerHTML = e.data;
+#          };
+#          </script>
+#        </body>
+#      </html>
+#     """
+#     return (debug_template)
