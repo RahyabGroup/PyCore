@@ -31,10 +31,12 @@ def prepare_db():
         try:
             user_id = "560121abcbf62c13d4567f0d"
             if not user_reader.exist_id(user_id):
+                from pyclaim.domain.aggregates.user.model.status import Status
                 sysadmin_user_name = "sysadmin@security.com"
                 sysadmin = User()
                 sysadmin._id = user_id
                 sysadmin.user_name = sysadmin_user_name
+                sysadmin.status = Status.activated
                 bcrypt = Bcrypt(None)
                 password_hash = bcrypt.generate_password_hash(sysadmin_user_name)
                 sysadmin.password = password_hash

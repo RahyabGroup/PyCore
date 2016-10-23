@@ -20,12 +20,17 @@ class Login:
             result = UserErrorCodes.USER_NOT_AVAILABLE
             result["data"] = "user_name: %s" % self.user_name
             raise ValidationException([result])
-        user_token = Token.generate(user._id)
-        token = {"token_id": user_token.token_id,
-                 "user_id": user_token.user_id,
-                 "is_sys_admin": user.is_sys_admin()
-                 }
-        object_coder = ObjectCoder(Config().secret_key)
-        hashed_token = object_coder.encode(token)
-        login_info = {"token": hashed_token, "user_id": user._id}
+        if not user.is_inoperable():
+            user_token = Token.generate(user._id)
+            token = {"token_id": user_token.token_id,
+                     "user_id": user_token.user_id,
+                     "is_sys_admin": user.is_sys_admin()
+                     }
+            object_coder = ObjectCoder(Config().secret_key)
+            hashed_token = object_coder.encode(token)
+            login_info = {"token": hashed_token, "user_id": user._id}
+        else:
+            result = UserErrorCodes.DEACTIVATED_USER
+            result["data"] = "user_name: %s" % self.user_name
+            raise ValidationException([result])
         return login_info

@@ -29,4 +29,13 @@ Feature: as a user I want to login to system
       | Unregistereduser_name@parsa.com |
       | None                        |
 
+
+
+  Scenario: deactivated user cant login
+    Given we are logged in as sysadmin - login
+    Given sysadmin registered a user with an user_name and password _ user_create
+    Given sysadmin deactivated the user - user_deactivate
+    When we login with the user_name and password - login
+    Then the system wont give us a token
+
 ##    todo : user_name casesensitive

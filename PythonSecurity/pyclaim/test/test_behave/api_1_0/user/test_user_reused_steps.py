@@ -52,6 +52,22 @@ def step_impl(context):
     assert result.status_code == ResponseStatusCodes.PUT_SUCCESS
 
 
+@When('sysadmin activate the user - user_activate')
+def step_impl(context):
+    headers = {"token": context.sysadmin_token}
+    result = requests.put(Url.DOMAIN_ADDRESS + Url.USER_ACTIVATE_ROUTE.format(context.user_id), headers=headers)
+    print(result)
+    context.result = result
+
+
+@When('sysadmin deactivate the user - user_deactivate')
+def step_impl(context):
+    headers = {"token": context.sysadmin_token}
+    result = requests.put(Url.DOMAIN_ADDRESS + Url.USER_DEACTIVATE_ROUTE.format(context.user_id), headers=headers)
+    print(result)
+    context.result = result
+
+
 @Given('sysadmin deactivated the user - user_deactivate')
 def step_impl(context):
     headers = {"token": context.sysadmin_token}

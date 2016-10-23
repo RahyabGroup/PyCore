@@ -2,6 +2,7 @@ from random import randint
 from flask_bcrypt import Bcrypt
 from pyclaim.domain.aggregates.user.model.claim import Claim
 from pyclaim.domain.aggregates.user.app.v1_0.rest.assembler import user_writer, user_reader
+from pyclaim.domain.aggregates.user.model.status import Status
 
 __author__ = 'Hooman'
 
@@ -11,6 +12,7 @@ class User:
     user_name = None
     password = None
     claims = None
+    status = None
 
     def __init__(self):
         self.claims = []
@@ -23,8 +25,9 @@ class User:
         user_default_claim = Claim()
         user_default_claim.claim_type_id = user_name_claim_type._id
         user_default_claim.value = self.user_name
-
         self.claims.append(user_default_claim)
+
+        self.status = Status.activated
         bcrypt = Bcrypt(None)
         password_hash = bcrypt.generate_password_hash(self.password)
         self.password = password_hash
@@ -101,6 +104,17 @@ class User:
         user = user_reader.get_by_id(self._id)
         return bcrypt.check_password_hash(user.password, password)
 
+    def activate(self):
+        user_writer.change_status(self._id, Status.activated)
+
+    def deactivate(self):
+        user_writer.change_status(self._id, Status.deactivated)
+
+    def is_inoperable(self):
+        if self.status == Status.deactivated:
+            return True
+        return False
+
     @staticmethod
     def get_all():
         return user_reader.get_all()
@@ -157,5 +171,7 @@ class User:
         user_writer.password_change(user._id, password_hash)
         Token.remove_by_user_id(user._id)
         return user
+
+
 
 

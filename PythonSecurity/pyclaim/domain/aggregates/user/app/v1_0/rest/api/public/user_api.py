@@ -2,9 +2,11 @@ from flask import request
 from pyfacil.web.rest.flask.response import *
 
 from pyclaim.domain.aggregates.user.app.v1_0.rest import apis
+from pyclaim.domain.aggregates.user.app.v1_0.rest.command.public.user_activate import UserActivate
 from pyclaim.domain.aggregates.user.app.v1_0.rest.command.public.user_claim_create import UserClaimCreate
 from pyclaim.domain.aggregates.user.app.v1_0.rest.command.public.user_claim_remove import UserClaimRemove
 from pyclaim.domain.aggregates.user.app.v1_0.rest.command.public.user_create import UserCreate
+from pyclaim.domain.aggregates.user.app.v1_0.rest.command.public.user_deactivate import UserDeactivate
 from pyclaim.domain.aggregates.user.app.v1_0.rest.command.public.user_edit import UserEdit
 from pyclaim.domain.aggregates.user.app.v1_0.rest.command.public.user_remove import UserRemove
 from pyclaim.domain.aggregates.user.app.v1_0.rest.command.public.user_claim_edit import UserClaimEdit
@@ -112,4 +114,20 @@ def logout():
     return response
 
 
+@apis.route('/users/<user_id>/activate', methods=['PUT'])
+@auth.authorize()
+def person_activate(user_id):
+    dto = {"user_id": user_id}
+    person_activate_command = UserActivate(dto)
+    person_activate_command.execute()
+    return ok(UserInfoCodes.DONE)
+
+
+@apis.route('/users/<user_id>/deactivate', methods=['PUT'])
+@auth.authorize()
+def person_deactivate(user_id):
+    dto = {"user_id": user_id}
+    person_deactivate_command = UserDeactivate(dto)
+    person_deactivate_command.execute()
+    return ok(UserInfoCodes.DONE)
 

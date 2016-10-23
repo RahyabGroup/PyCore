@@ -63,3 +63,7 @@ class UserWriter(Repository):
         password_dict = serializer.serialize_to_dictionary(new_password)
         self._collection.writer.edit_by_condition({"_id": ObjectId(user_id)},
                                                   {"$set": {"password": password_dict}})
+
+    def change_status(self, user_id, status):
+        self._collection.writer.edit_by_condition({"_id": ObjectId(user_id)},
+                                                  {"$set": {"status": status}})

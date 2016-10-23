@@ -15,6 +15,8 @@ class Url:
     USER_GET_BY_ID_ROUTE = '/users/{}'
     USER_GET_ALL_ROUTE = '/users'
     USER_REMOVE_ROUTE = '/users/{}'
+    USER_ACTIVATE_ROUTE = '/users/{}/activate'
+    USER_DEACTIVATE_ROUTE = '/users/{}/deactivate'
 
     CLAIM_TYPE_GET_ALL_ROUTE = "/claim_types"
     CLAIM_TYPE_CREATE_ROUTE = "/claim_types"
