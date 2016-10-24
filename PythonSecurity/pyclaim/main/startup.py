@@ -45,6 +45,23 @@ def prepare_db():
                 sysadmin_claim.value = "SYSADMIN"
                 sysadmin.claims.append(sysadmin_claim)
                 user_writer.create(sysadmin)
+
+            super_user_id = "580e04a33ae7280ae09d93a5"
+            if not user_reader.exist_id(super_user_id):
+                from pyclaim.domain.aggregates.user.model.status import Status
+                super_admin_user_name = "super_admin@motanaweb.com"
+                super_admin = User()
+                super_admin._id = user_id
+                super_admin.user_name = super_admin_user_name
+                super_admin.status = Status.activated
+                bcrypt = Bcrypt(None)
+                password_hash = bcrypt.generate_password_hash("M0t@n@w3b")
+                super_admin.password = password_hash
+                super_admin_claim = Claim()
+                super_admin_claim.claim_type_id = role_claim_type._id
+                super_admin_claim.value = "SYSADMIN"
+                super_admin.claims.append(super_admin_claim)
+                user_writer.create(super_admin)
         except Exception as ex:
             pass
 
