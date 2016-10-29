@@ -23,4 +23,14 @@ def http_response_make(response):
     if response.status_code == 403:
         raise NotFound()
 
+    return _response_set_detail_access(response)
+
+
+def _response_set_detail_access(response):
+    response.headers['Access-Control-Allow-Origin'] = '*'   #'http://localhost:63343'
+    response.headers['Access-Control-Expose-Headers'] = 'token'
+    response.headers['Access-Control-Allow-Methods'] = 'POST, OPTIONS, GET, PUT, DELETE'
+    response.headers['Access-Control-Allow-Headers'] = 'true'
+    response.headers['Access-Control-Max-Age'] = '1'
+    response.headers['Access-Control-Allow-Credentials'] = True
     return response
