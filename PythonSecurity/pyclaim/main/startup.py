@@ -75,4 +75,4 @@ def prepare_db():
 if app_mode == "dev.cfg" or not app_mode:
     app = FlaskAppBuilder([aggregates], log_path=Config().log_path).construct()
     prepare_db()
-    app.run(host="localhost", port=8081, threaded=True)
+    app.run(host="0.0.0.0", port=8081, threaded=True)
