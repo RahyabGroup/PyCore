@@ -12,6 +12,8 @@ class ErrorCodes:
     RESOURCE_NOT_FOUND = {"title": "RESOURCE_NOT_FOUND", "code": "main_err08"}
     USER_IS_NOT_OWNER = {"title": "USER_IS_NOT_OWNER", "code": "main_err09"}
     SEARCH_CRITERIA_IS_NOT_DEFINED = {"title": "SEARCH_CRITERIA_IS_NOT_DEFINED", "code": "main_err10"}
+    INVALID_AUTH_CREDENTIALS = {"title": 'INVALID_AUTH_CREDENTIALS', "code": "err1010"}
+
 
 class InfoCodes:
     DONE = {"title": "DONE", "code": "info1001"}

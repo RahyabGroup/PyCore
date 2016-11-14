@@ -67,6 +67,12 @@ def unauthenticated():
     return response
 
 
+def not_acceptable():
+    response = _response_get(ErrorCodes.INVALID_AUTH_CREDENTIALS, is_error=True)
+    response.status_code = 406
+    return response
+
+
 def make_send_file_response(file_content, file_name):
     response = make_response(file_content)
     response.headers["Content-Disposition"] = "attachment; filename=%s" % file_name
