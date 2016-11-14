@@ -22,7 +22,7 @@ def file_download(storage_name, file_name):
 
 
 @apis.route('/files/<storage_name>', methods=['POST'])
-@auth.login_required()
+# @auth.login_required()
 def file_upload(storage_name):
     file_key = next(iter(request.files))
     file = request.files[file_key]
@@ -33,7 +33,7 @@ def file_upload(storage_name):
 
 
 @apis.route('/files/<storage_name>/<old_file_name>', methods=['PUT'])
-@auth.login_required()
+# @auth.login_required()
 def file_replace(storage_name, old_file_name):
     file_key = next(iter(request.files))
     file = request.files[file_key]
@@ -45,7 +45,7 @@ def file_replace(storage_name, old_file_name):
 
 
 @apis.route('/files/<storage_name>/<file_name>', methods=['DELETE'])
-@auth.login_required()
+# @auth.login_required()
 def file_remove(storage_name, file_name):
     dto = {"storage_name": storage_name, "file_name": file_name}
     file_remove_command = FileRemove(dto)
