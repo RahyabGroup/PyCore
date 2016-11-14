@@ -37,7 +37,8 @@ def file_upload(storage_name):
 def file_replace(storage_name, old_file_name):
     file_key = next(iter(request.files))
     file = request.files[file_key]
-    dto = {"storage_name": storage_name, "old_file_name": old_file_name, "new_file": {"file_name": file.filename, "file_content": file.read()} }
+    dto = {"storage_name": storage_name, "old_file_name": old_file_name, "new_file": {"file_name": file.filename,
+                                                                                      "file_content": file.read()}}
     file_replace_command = FileReplace(dto)
     file_replace_command.execute()
     return ok(FileInfoCodes.DONE)
