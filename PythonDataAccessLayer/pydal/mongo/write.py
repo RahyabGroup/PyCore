@@ -28,6 +28,9 @@ class WriteCommand:
     def edit_by_condition(self, first_query, second_query, multi=True):
         self._mongo_collection.update(first_query, second_query, multi=multi)
 
+    def upsert(self, first_query, second_query):
+        self._mongo_collection.update(first_query, second_query, upsert=True)
+
     def remove_by_id(self, id_string):
         self._mongo_collection.remove({"_id": ObjectId(id_string)})
 
