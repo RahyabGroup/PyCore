@@ -1,5 +1,7 @@
+from bson import ObjectId
 from pyfacil.web.query_string.query_string_criteria_emptiness_validation import QueryStringCriteriaEmptinessValidation
 from pyfacil.web.query_string.query_string_fetch_validation import QueryStringFetchValidation
+from pyfacil.web.query_string.query_string_ids_emptiness_validation import QueryStringIdsEmptinessValidation
 
 __author__ = 'H.Rouhani'
 
@@ -44,6 +46,9 @@ class QueryStringInfo:
         if "criteria" in query_string:
             self.load_criteria(query_string)
 
+        if "ids" in query_string:
+            self.load_ids(query_string)
+
     def load_sort(self, query_string):
         if query_string and query_string["sort"]:
             self.sort = {}
@@ -69,3 +74,14 @@ class QueryStringInfo:
                 criteria_field_name = criteria_item_list[0]
                 criteria_field_value = criteria_item_list[1]
                 self.criteria.append((criteria_field_name, criteria_field_value))
+
+    def load_ids(self, query_string):
+        if query_string and query_string["ids"]:
+            query_string_ids_emptiness_validation = QueryStringIdsEmptinessValidation()
+            query_string_ids_emptiness_validation.validate(query_string)
+            self.ids = []
+            ids_item = query_string['ids']
+            ids_list = ids_item.split(",")
+            [self.ids.append(ObjectId(id)) for id in ids_list]
+
+

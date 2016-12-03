@@ -13,6 +13,7 @@ class ErrorCodes:
     USER_IS_NOT_OWNER = {"title": "USER_IS_NOT_OWNER", "code": "main_err09"}
     SEARCH_CRITERIA_IS_NOT_DEFINED = {"title": "SEARCH_CRITERIA_IS_NOT_DEFINED", "code": "main_err10"}
     INVALID_AUTH_CREDENTIALS = {"title": 'INVALID_AUTH_CREDENTIALS', "code": "err1010"}
+    SEARCH_ID_LIST_IS_EMPTY = {"title": "SEARCH_ID_LIST_IS_EMPTY", "code": "main_err1020"}
 
 
 class InfoCodes:
