@@ -70,10 +70,36 @@ class QueryStringInfo:
             criteria_item = query_string["criteria"]
             criteria_list = criteria_item.split(",")
             for criteria_item in criteria_list:
-                criteria_item_list = criteria_item.split(":")
-                criteria_field_name = criteria_item_list[0]
-                criteria_field_value = criteria_item_list[1]
-                self.criteria.append((criteria_field_name, criteria_field_value))
+                if ":" in criteria_item:
+                    criteria_item_list = criteria_item.split(":")
+                    criteria_field_name = criteria_item_list[0]
+                    criteria_field_value = criteria_item_list[1]
+                    self.criteria.append((criteria_field_name, criteria_field_value))
+                elif "<" in criteria_item:
+                    criteria_item_list = criteria_item.split("<")
+                    criteria_field_name = criteria_item_list[0]
+                    criteria_field_value = criteria_item_list[1]
+                    self.criteria.append((criteria_field_name, "<{}".format(criteria_field_value)))
+                elif ">" in criteria_item:
+                    criteria_item_list = criteria_item.split(">")
+                    criteria_field_name = criteria_item_list[0]
+                    criteria_field_value = criteria_item_list[1]
+                    self.criteria.append((criteria_field_name, ">{}".format(criteria_field_value)))
+                elif "<=" in criteria_item:
+                    criteria_item_list = criteria_item.split("<=")
+                    criteria_field_name = criteria_item_list[0]
+                    criteria_field_value = criteria_item_list[1]
+                    self.criteria.append((criteria_field_name, "<={}".format(criteria_field_value)))
+                elif ">=" in criteria_item:
+                    criteria_item_list = criteria_item.split(">=")
+                    criteria_field_name = criteria_item_list[0]
+                    criteria_field_value = criteria_item_list[1]
+                    self.criteria.append((criteria_field_name, ">={}".format(criteria_field_value)))
+                elif "=" in criteria_item:
+                    criteria_item_list = criteria_item.split("=")
+                    criteria_field_name = criteria_item_list[0]
+                    criteria_field_value = criteria_item_list[1]
+                    self.criteria.append((criteria_field_name, format(criteria_field_value)))
 
     def load_ids(self, query_string):
         if query_string and query_string["ids"]:

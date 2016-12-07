@@ -13,6 +13,7 @@ class IsoDateAsStringSearchGenerator:
         self.field_name = field_name
 
     def generate(self, value):
+        #  in format (isoformat~isoformat)
         try:
             if '~' not in value:
                 date = dateutil.parser.parse(value) + datetime.timedelta(hours=23, minutes=59, seconds=59)
