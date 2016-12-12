@@ -1,4 +1,3 @@
-from bson import ObjectId
 from pyfacil.web.query_string.query_string_criteria_emptiness_validation import QueryStringCriteriaEmptinessValidation
 from pyfacil.web.query_string.query_string_fetch_validation import QueryStringFetchValidation
 from pyfacil.web.query_string.query_string_ids_emptiness_validation import QueryStringIdsEmptinessValidation
@@ -108,6 +107,6 @@ class QueryStringInfo:
             self.ids = []
             ids_item = query_string['ids']
             ids_list = ids_item.split(",")
-            [self.ids.append(ObjectId(id)) for id in ids_list]
+            [self.ids.append(id) for id in ids_list]
 
 
