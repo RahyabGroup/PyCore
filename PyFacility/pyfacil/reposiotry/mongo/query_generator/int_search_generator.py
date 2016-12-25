@@ -6,8 +6,6 @@ __author__ = 'H.Rouhani'
 
 
 class IntSearchGenerator:
-    split_string = None
-    string_splitter_operator = None
     field_name = None
 
     def __init__(self, field_name):
