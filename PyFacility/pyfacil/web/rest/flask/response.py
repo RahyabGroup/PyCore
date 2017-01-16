@@ -1,3 +1,4 @@
+import urllib.parse
 from pyfacil.security_client.exceptions.inoperable_user import InoperableUserError
 from pyfacil.security_client.exceptions.authorization import AuthorizationError
 from pyfacil.security_client.exceptions.authentication import AuthenticationError
@@ -76,6 +77,10 @@ def not_acceptable():
 def make_send_file_response(file_content, file_name):
     response = make_response(file_content)
     response.headers["Content-Disposition"] = "attachment; filename=%s" % file_name
+    response.headers["Content-Disposition"] = "attachment;filename*=UTF-8''{}".format(urllib.parse.quote(
+        file_name.encode(
+        'utf8')))
+    response.headers['Access-Control-Allow-Origin'] = '*'   #'http://localhost:63343'
     return response
 
 
