@@ -16,5 +16,6 @@ class UserErrorCodes(ErrorCodes):
     USER_IS_IN_AWAIT_STATUS = {"body": "USER_IS_IN_AWAIT_STATUS", "code": "err1019"}
     USER_IS_NOT_In_AWAIT_Status = {"body": "USER_IS_NOT_In_AWAIT_Status", "code": "err1025"}
 
+
 class UserInfoCodes(InfoCodes):
     pass
