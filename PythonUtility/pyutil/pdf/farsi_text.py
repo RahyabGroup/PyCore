@@ -32,3 +32,14 @@ class FarsiText:
         _date = dateutil.parser.parse(isoformat_date)
         jalai_date = jalaali.Jalaali().to_jalaali(_date.year, _date.month, _date.day)
         return reshaper.replace_digits('{}-{}-{}'.format(jalai_date['jy'], jalai_date['jm'], jalai_date['jd']))
+
+    @staticmethod
+    def get_reversed_text(text):
+        if reshaper.has_arabic_letters(text):
+            words = text.split()
+            reshaped_words = []
+            for word in words:
+                    reshaped_words.append(word)
+            reshaped_words.reverse()
+            return ' '.join(reshaped_words)
+        return text
