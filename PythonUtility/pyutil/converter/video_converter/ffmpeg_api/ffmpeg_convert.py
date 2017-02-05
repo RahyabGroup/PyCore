@@ -1,7 +1,7 @@
 import subprocess
 __author__ = 'root'
 
-FFMPEG_PATH = '$HOME/bin/ffmpeg'
+FFMPEG_PATH = '/root/bin/ffmpeg'
 
 
 def encode(file, video_configs, output_file):
