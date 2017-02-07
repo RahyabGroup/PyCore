@@ -16,6 +16,8 @@ def fulfill_template(template_str, data):
 
 
 def convert_into_pdf_stream(string_array, options=None, css=None, config=None):
+    if config:
+        config = pdfkit.configuration(**config)
     if not options:
         options = dict()
     options.update({'quiet': ''})
