@@ -15,11 +15,11 @@ def fulfill_template(template_str, data):
     return string_array
 
 
-def convert_into_pdf_stream(string_array, options=None):
+def convert_into_pdf_stream(string_array, options=None, css=None):
     if not options:
         options = dict()
     options.update({'quiet': ''})
-    bytes_array = pdfkit.PDFKit(string_array, 'string', options=options).to_pdf()
+    bytes_array = pdfkit.PDFKit(string_array, 'string', options=options, css=css).to_pdf()
     return bytes_array
 
 
