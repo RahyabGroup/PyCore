@@ -21,7 +21,8 @@ def convert_into_pdf_stream(string_array, options=None, css=None, config=None):
     if not options:
         options = dict()
     options.update({'quiet': ''})
-    bytes_array = pdfkit.PDFKit(string_array, 'string', options=options, css=css, configuration=config).to_pdf()
+    bytes_array = pdfkit.PDFKit(url_or_file=string_array, type_='string', options=options, css=css,
+                                configuration=config).to_pdf()
     return bytes_array
 
 
