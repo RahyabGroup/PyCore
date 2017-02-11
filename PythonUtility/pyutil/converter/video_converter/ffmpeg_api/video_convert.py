@@ -6,7 +6,7 @@ __author__ = 'root'
 def convert_to_mp4(file_path, file_name, output_path=None):
     # mp4_configs = ['-c:v', 'libx264', '-preset', 'fast', '-profile:v', 'high']
     output_path = file_path if not output_path else output_path
-    mp4_configs = ['-qscale', '4', '-vcodec', 'libx264', '-f', 'mp4']
+    mp4_configs = ['-vcodec', 'libx264', '-profile:v', 'high', '-c:a', 'libfdk_aac']
     converted_file_name = '{}.{}'.format(''.join(file_name.split('.')[:-1]), 'mp4')
     encode('{}/{}'.format(file_path, file_name), mp4_configs,
            '{}/{}'.format(output_path, converted_file_name))
