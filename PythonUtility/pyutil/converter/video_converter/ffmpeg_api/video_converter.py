@@ -5,6 +5,7 @@ __author__ = 'root'
 
 
 def convert_to_mp4(source_file_path, source_file_name, output_path=None, output_file_name=None, remove_source_file=False):
+    print('thread started -----------------------------------------------------------------------')
     output_path = source_file_path if not output_path else output_path
     mp4_configs = ['-codec:v', 'libx264', '-profile:v', 'high', '-codec:a', 'libfdk_aac']
     if not output_file_name:
@@ -14,6 +15,7 @@ def convert_to_mp4(source_file_path, source_file_name, output_path=None, output_
            '{}/{}'.format(output_path, converted_file_name))
     if remove_source_file:
         _remove_file(source_file_path, source_file_name)
+    print('thread ended ---------------------------------------------------------------------------')
     return converted_file_name
 
 
