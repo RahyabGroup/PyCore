@@ -1,4 +1,4 @@
-from pyutil.converter.video_converter.ffmpeg_api.ffmpeg_convert import encode
+from pyutil.converter.video_converter.ffmpeg_api.ffmpeg_convert_api import encode
 
 __author__ = 'root'
 
