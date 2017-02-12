@@ -3,11 +3,12 @@ from pyutil.converter.video_converter.ffmpeg_api.ffmpeg_convert import encode
 __author__ = 'root'
 
 
-def convert_to_mp4(file_path, file_name, output_path=None):
-    # mp4_configs = ['-c:v', 'libx264', '-preset', 'fast', '-profile:v', 'high']
+def convert_to_mp4(file_path, file_name, output_path=None, output_file_name=None):
     output_path = file_path if not output_path else output_path
     mp4_configs = ['-vcodec', 'libx264', '-profile:v', 'high', '-c:a', 'libfdk_aac']
-    converted_file_name = '{}.{}'.format(''.join(file_name.split('.')[:-1]), 'mp4')
+    if not output_file_name:
+        output_file_name = ''.join(file_name.split('.')[:-1])
+    converted_file_name = '{}.{}'.format(output_file_name, 'mp4')
     encode('{}/{}'.format(file_path, file_name), mp4_configs,
            '{}/{}'.format(output_path, converted_file_name))
     return converted_file_name
