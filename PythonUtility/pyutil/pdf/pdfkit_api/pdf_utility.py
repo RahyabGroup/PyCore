@@ -5,7 +5,7 @@ import pdfkit
 
 
 def load_template_from_file(file_name):
-    with open(file_name, 'r') as template_file:
+    with open(file_name, 'r', encoding='utf-8') as template_file:
         return template_file.read()
 
 
