@@ -11,8 +11,7 @@ class Collection:
         self.collection_name = collection_name
         self._mongo_collection = mongo_collection
 
-    def create_index(self, indexes_dict):
-        indexes = [(k, v) for k, v in indexes_dict.items()]
+    def create_index(self, indexes):
         self._mongo_collection.create_index(indexes)
 
     def _get_reader(self):
