@@ -11,8 +11,8 @@ class Collection:
         self.collection_name = collection_name
         self._mongo_collection = mongo_collection
 
-    def create_index(self, indexes):
-        self._mongo_collection.create_index(indexes)
+    def create_index(self, index):
+        self._mongo_collection.create_index(index)
 
     def _get_reader(self):
         pydal_reader = ReadCommand(self._mongo_collection)
