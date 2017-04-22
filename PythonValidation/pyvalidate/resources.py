@@ -22,3 +22,5 @@ class ErrorCodes:
     STRING_IS_EMPTY_OR_NULL = {"title": "STRING_IS_EMPTY_OR_NULL", "code": "validation_err18"}
     FLOAT_LOWER_THAN_MIN_SIZE = {"title": "FLOAT_LOWER_THAN_MIN_SIZE", "code": "validation_err19"}
     FLOAT_HIGHER_THAN_MAX_SIZE = {"title": "FLOAT_HIGHER_THAN_MAX_SIZE", "code": "validation_err20"}
+    ITEM_IS_NOT_ONLY_PERSIAN = {"title": "ITEM_IS_NOT_ONLY_PERSIAN", "code": "validation_err21"}
+    ITEM_IS_NOT_ONLY_ENGLISH = {"title": "ITEM_IS_NOT_ONLY_ENGLISH", "code": "validation_err22"}
