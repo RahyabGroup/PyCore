@@ -24,3 +24,4 @@ class ErrorCodes:
     FLOAT_HIGHER_THAN_MAX_SIZE = {"title": "FLOAT_HIGHER_THAN_MAX_SIZE", "code": "validation_err20"}
     ITEM_IS_NOT_ONLY_PERSIAN = {"title": "ITEM_IS_NOT_ONLY_PERSIAN", "code": "validation_err21"}
     ITEM_IS_NOT_ONLY_ENGLISH = {"title": "ITEM_IS_NOT_ONLY_ENGLISH", "code": "validation_err22"}
+    OBJECT_ID_NOT_VALID = {"title": "OBJECT_ID_NOT_VALID", "code": "validation_err23"}

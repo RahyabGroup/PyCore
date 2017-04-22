@@ -1,3 +1,4 @@
+from bson import ObjectId
 from testpyvalidate.entity_helper.address import Address
 from testpyvalidate.entity_helper.office import Office
 
@@ -7,6 +8,8 @@ __author__ = 'h.rouhani'
 
 class Employee:
     def __init__(self):
+        # self._setId(str(ObjectId()))
+        self._id = str(ObjectId())
         self.phones = []
         self.addresses = []
         self.office = Office()
@@ -35,7 +38,16 @@ class Employee:
     def _setPhones(self, phones):
         self.phones = phones
 
+    # fixme
+    # def _getId(self):
+    #     return self._id
+    #
+    # def _setId(self, val):
+    #     self._id = val
+
     Name = property(_getName, _setName)
     Office = property(_getOffice, _setOffice)
     Addresses = property(_getAddresses, _setAddresses)
     Phones = property(_getPhones, _setPhones)
+    # _id = property(_getId, _setId)
+

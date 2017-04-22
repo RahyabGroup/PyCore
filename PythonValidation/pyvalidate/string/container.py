@@ -2,6 +2,7 @@ from pyvalidate.string.available_date_string import AvailableDateString
 from pyvalidate.string.email import Email
 from pyvalidate.string.empty import Empty
 from pyvalidate.string.equality import Equality
+from pyvalidate.string.object_id import ObjectId
 from pyvalidate.string.only_english import OnlyEnglish
 from pyvalidate.string.only_persian import OnlyPersian
 from pyvalidate.string.only_string import OnlyString
@@ -48,3 +49,7 @@ class Container(ValidationContainer):
     def only_persian(self, string, none_exception=True):
         only_persian_validation = OnlyPersian()
         return self._execute(string, only_persian_validation, none_exception)
+
+    def object_id(self, string, none_exception=True):
+        object_id_validation = ObjectId()
+        return self._execute(string, object_id_validation, none_exception)

@@ -10,7 +10,7 @@ class OfficeValidation(Validation):
         super().integer.positive(office.FloorNo, False)
         super().integer.positive(office.SectionNo, True)
         super().integer.size(office.FloorNo, 2, 15)
-        super().date.available_date_string(office.Date, False)
+        super().string.available_date_string(office.Date, False)
         if office.sectionNo == 753:
             super().custom.manual({"body": "SECTION_NUMBER_NOT_AVAILABLE", "code": "err403"})
         return super().validate()

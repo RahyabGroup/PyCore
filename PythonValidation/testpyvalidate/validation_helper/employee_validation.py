@@ -8,6 +8,7 @@ __author__ = 'Hooman'
 
 class EmployeeValidation(Validation):
     def validate(self, employee):
+        super().string.object_id(employee._id, none_exception=False)
         super().string.size(employee.Name, 3, 15, True)
         super().list.size(employee.addresses, 1, 2)
         super().list.custom(employee.Addresses, AddressValidation())

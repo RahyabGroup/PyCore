@@ -175,3 +175,48 @@ akjfdakjdf"""
         only_persian_validation = PersianEmployeeValidation()
         result = only_persian_validation.validate(employee)
         assert result is None
+
+    def test_ObjectIdValidation_ShouldNotAcceptIncorrectObjectId(self):
+        employee = Employee()
+        employee.Name = "Hooman"
+        employee.Office.Code = -1
+        employee.Office.UnitNumber = -100
+        employee.Office.FloorNo = 10
+        employee.Office.SectionNo = 5
+        employee.Addresses.append(Address._getAddressInstance())
+        employee.Addresses.append(Address._getAddressInstance())
+        employeeValidation = EmployeeValidation()
+        result = employeeValidation.validate(employee)
+        assert result is None
+        try:
+            employee._id = "12345a"
+            result = employeeValidation.validate(employee)
+            assert result is not None
+        except ValidationException as ex:
+            assert ex.Errors
+
+        try:
+            employee._id = "12zxh"
+            result = employeeValidation.validate(employee)
+            assert result is not None
+        except ValidationException as ex:
+            assert ex.Errors
+
+    def test_ObjectIdValidation_ShouldAcceptCorrectObjectId(self):
+        employee = Employee()
+        employee.Name = "Hooman"
+        employee.Office.Code = -1
+        employee.Office.UnitNumber = -100
+        employee.Office.FloorNo = 10
+        employee.Office.SectionNo = 5
+        employee.Addresses.append(Address._getAddressInstance())
+        employee.Addresses.append(Address._getAddressInstance())
+        employeeValidation = EmployeeValidation()
+        result = employeeValidation.validate(employee)
+        assert result is None
+        try:
+            employee._id = "58fafa353ae7282b18041c1e"
+            result = employeeValidation.validate(employee)
+            assert result is None
+        except ValidationException as ex:
+            assert ex.Errors
