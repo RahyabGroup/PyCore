@@ -2,6 +2,8 @@ from pyvalidate.string.available_date_string import AvailableDateString
 from pyvalidate.string.email import Email
 from pyvalidate.string.empty import Empty
 from pyvalidate.string.equality import Equality
+from pyvalidate.string.only_english import OnlyEnglish
+from pyvalidate.string.only_persian import OnlyPersian
 from pyvalidate.string.only_string import OnlyString
 from pyvalidate.string.size import Size
 from pyvalidate.string.text_size import TextSize
@@ -38,3 +40,11 @@ class Container(ValidationContainer):
     def available_date_string(self, item_to_validate, none_exception=True):
         available_date_string_validation = AvailableDateString()
         return self._execute(item_to_validate, available_date_string_validation, none_exception)
+
+    def only_english(self, string, none_exception=True):
+        only_english_validation = OnlyEnglish()
+        return self._execute(string, only_english_validation, none_exception)
+
+    def only_persian(self, string, none_exception=True):
+        only_persian_validation = OnlyPersian()
+        return self._execute(string, only_persian_validation, none_exception)

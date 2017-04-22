@@ -5,6 +5,8 @@ from testpyvalidate.entity_helper.address import Address
 from testpyvalidate.entity_helper.employee import Employee
 from testpyvalidate.validation_helper.address_validation import AddressValidation
 from testpyvalidate.validation_helper.employee_validation import EmployeeValidation
+from testpyvalidate.validation_helper.english_employee_validation import EnglishEmployeeValidation
+from testpyvalidate.validation_helper.persian_employee_validation import PersianEmployeeValidation
 
 __author__ = 'h.rouhani'
 
@@ -124,4 +126,52 @@ akjfdakjdf"""
         addressValidation.validate(address)
         address.street = "azadi st raha ave"
         result = addressValidation.validate(address)
+        assert result is None
+
+    def test_OnlyEnglishValidation_ShouldNotAcceptNotEnglishString(self):
+        employee = Employee()
+        only_english_validation = EnglishEmployeeValidation()
+        try:
+            employee.Name = "آقایmr"
+            result = only_english_validation.validate(employee)
+            assert result is not None
+        except ValidationException as ex:
+            assert ex.Errors
+
+        try:
+            employee.Name = " رضوان"
+            result = only_english_validation.validate(employee)
+            assert result is not None
+        except ValidationException as ex:
+            assert ex.Errors
+
+    def test_OnlyEnglishValidation_ShouldAcceptStringWhichOnlyContainsEnglishAlphabeticalCharacterWithSpaces(self):
+        employee = Employee()
+        employee.name = "Rezvan aj"
+        only_english_validation = EnglishEmployeeValidation()
+        result = only_english_validation.validate(employee)
+        assert result is None
+
+    def test_OnlyPersianValidation_ShouldNotAcceptNotPersianString(self):
+        employee = Employee()
+        only_persian_validation = PersianEmployeeValidation()
+        try:
+            employee.Name = "آقایmr"
+            result = only_persian_validation.validate(employee)
+            assert result is not None
+        except ValidationException as ex:
+            assert ex.Errors
+
+        try:
+            employee.Name = "mis aj"
+            result = only_persian_validation.validate(employee)
+            assert result is not None
+        except ValidationException as ex:
+            assert ex.Errors
+
+    def test_OnlyPersianValidation_ShouldAcceptStringWhichOnlyContainsPersianAlphabeticalCharacterWithSpaces(self):
+        employee = Employee()
+        employee.name = "رضوان آژ"
+        only_persian_validation = PersianEmployeeValidation()
+        result = only_persian_validation.validate(employee)
         assert result is None
