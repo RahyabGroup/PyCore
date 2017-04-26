@@ -25,3 +25,5 @@ class ErrorCodes:
     ITEM_IS_NOT_ONLY_PERSIAN = {"title": "ITEM_IS_NOT_ONLY_PERSIAN", "code": "validation_err21"}
     ITEM_IS_NOT_ONLY_ENGLISH = {"title": "ITEM_IS_NOT_ONLY_ENGLISH", "code": "validation_err22"}
     OBJECT_ID_NOT_VALID = {"title": "OBJECT_ID_NOT_VALID", "code": "validation_err23"}
+    TRI_STATE_NOT_VALID = {"title": "TRI_STATE_NOT_VALID", "code": "validation_err24"}
+    ITEM_IS_NOT_BOOLEAN = {"title": "ITEM_IS_NOT_BOOLEAN", "code": "validation_err25"}
