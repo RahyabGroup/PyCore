@@ -5,7 +5,7 @@ __author__ = 'root'
 
 
 class Container(ValidationContainer):
-    def type(self, item_to_validate, none_exception=True):
+    def type(self, item_to_validate, none_exception=True, field_name=None):
         tri_state_type_validation = Type()
-        return self._execute(item_to_validate, tri_state_type_validation, none_exception)
+        return self._execute(item_to_validate, tri_state_type_validation, none_exception, field_name)
 

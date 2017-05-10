@@ -5,11 +5,11 @@ class Custom:
     def __init__(self, validation):
         self._validation = validation
 
-    def validate(self, item_to_validate):
+    def validate(self, item_to_validate, field_name=None):
         result_message = []
 
         for item in item_to_validate:
-            validation_result = self._validation.validate(item)
+            validation_result = self._validation.validate(item, field_name)
             if validation_result is not None:
                 if isinstance(validation_result, list):
                     result_message = validation_result

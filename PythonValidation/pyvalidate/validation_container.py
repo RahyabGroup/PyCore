@@ -11,36 +11,31 @@ class ValidationContainer:
         if item_to_validate is None:
             if none_exception:
                 result = ErrorCodes.ITEM_IS_NONE
-                result["data"] = ""
+                result[field_name if field_name else "data"] = ""
                 none_validation_error = result
                 self._validation_result.append(none_validation_error)
                 return [none_validation_error]
             else:
                 return None
-        result = validator.validate(item_to_validate)
+        result = validator.validate(item_to_validate, field_name)
         if result is not None:
             if isinstance(result, list):
-                if field_name:
-                    for r in result:
-                        r['field_name'] = field_name
                 self._validation_result.extend(result)
             else:
-                if field_name:
-                    result['field_name'] = field_name
                 self._validation_result.append(result)
         return result
 
-    def _execute_async(self, item_to_validate, validator, none_exception):
+    def _execute_async(self, item_to_validate, validator, none_exception, field_name=None):
         if item_to_validate is None:
             if none_exception:
                 result = ErrorCodes.ITEM_IS_NONE
-                result["data"] = ""
+                result[field_name if field_name else "data"] = ""
                 none_validation_error = result
                 self._validation_result.append(none_validation_error)
                 return [none_validation_error]
             else:
                 return None
-        result = yield from validator.validate(item_to_validate)
+        result = yield from validator.validate(item_to_validate, field_name)
         if result is not None:
             if isinstance(result, list):
                 self._validation_result.extend(result)
