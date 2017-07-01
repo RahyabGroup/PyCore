@@ -1,4 +1,4 @@
-__author__ = 'root'
+__author__ = 'R.Azh'
 
 
 def create_result_message(error_message, field_name, value):

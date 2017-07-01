@@ -1,4 +1,4 @@
-__author__ = 'root'
+__author__ = 'R.Azh'
 from rtl import reshaper
 from bidi.algorithm import get_display
 

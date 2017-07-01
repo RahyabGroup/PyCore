@@ -3,7 +3,7 @@ import string
 from pyvalidate.create_result_message import create_result_message
 from pyvalidate.resources import ErrorCodes
 
-__author__ = 'root'
+__author__ = 'R.Azh'
 
 
 class OnlyPersian:

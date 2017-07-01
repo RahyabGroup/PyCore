@@ -1,6 +1,6 @@
 from pyvalidate.validation import Validation
 
-__author__ = 'root'
+__author__ = 'R.Azh'
 
 
 class PersianEmployeeValidation(Validation):

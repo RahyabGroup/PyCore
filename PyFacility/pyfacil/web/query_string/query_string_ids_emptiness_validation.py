@@ -1,7 +1,7 @@
 from pyvalidate.validation import Validation
 from pyfacil.web.rest.resource import ErrorCodes
 
-__author__ = 'root'
+__author__ = 'R.Azh'
 
 
 class QueryStringIdsEmptinessValidation(Validation):

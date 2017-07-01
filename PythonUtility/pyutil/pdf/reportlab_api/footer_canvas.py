@@ -3,7 +3,7 @@ from reportlab.lib.pagesizes import A4
 from reportlab.pdfgen import canvas
 from pyutil.pdf.farsi_text import FarsiText
 
-__author__ = 'root'
+__author__ = 'R.Azh'
 
 
 class FooterCanvas(canvas.Canvas):

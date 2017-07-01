@@ -1,7 +1,7 @@
 from reportlab.lib import colors
 from reportlab.platypus import TableStyle
 
-__author__ = 'root'
+__author__ = 'R.Azh'
 
 
 class FarsiStyles:

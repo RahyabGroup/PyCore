@@ -1,7 +1,7 @@
 import textwrap
 from pyutil.pdf.farsi_text import FarsiText
 
-__author__ = 'root'
+__author__ = 'R.Azh'
 
 
 class FormatText:

@@ -1,7 +1,7 @@
 from pyvalidate.tri_state.type import Type
 from pyvalidate.validation_container import ValidationContainer
 
-__author__ = 'root'
+__author__ = 'R.Azh'
 
 
 class Container(ValidationContainer):

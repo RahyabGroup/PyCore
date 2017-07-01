@@ -2,7 +2,7 @@ import subprocess
 from pyutil.converter.video_converter.ffmpeg_api.ffmpeg_convert_api import encode
 from pyutil.converter.video_converter.ffmpeg_api.video_configurations import VideoConfigurations
 
-__author__ = 'root'
+__author__ = 'R.Azh'
 
 
 def convert_to_mp4(source_file_path, source_file_name, convert_config='MP4_NORMAL_RESOLUTION', output_path=None,

@@ -1,4 +1,4 @@
-__author__ = 'H.Rouhani'
+__author__ = 'R.Azh'
 
 
 class BoolSearchGenerator:

@@ -1,5 +1,5 @@
 import subprocess
-__author__ = 'root'
+__author__ = 'R.Azh'
 
 # FFMPEG_PATH = 'ffmpeg'
 FFMPEG_PATH = '/bin/ffmpeg'
