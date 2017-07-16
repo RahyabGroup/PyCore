@@ -10,7 +10,7 @@ class ValidationContainer:
     def _execute(self, item_to_validate, validator, none_exception, field_name=None):
         if item_to_validate is None:
             if none_exception:
-                result = ErrorCodes.ITEM_IS_NONE
+                result = ErrorCodes.ITEM_IS_NONE.copy()
                 result[field_name if field_name else "data"] = ""
                 none_validation_error = result
                 self._validation_result.append(none_validation_error)
