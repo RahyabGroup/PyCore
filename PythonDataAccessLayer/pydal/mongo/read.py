@@ -37,7 +37,7 @@ class ReadCommand:
     def is_available(self, query):
         return self._mongo_collection.find_one(query, {"_id": 1}) is not None
 
-    def aggregate(self, fields=[], skip=0, take=50, sort={'_id': pymongo.DESCENDING}, query=[]):
+    def aggregate(self, fields=[], skip=0, take=50, sort={'_id': pymongo.DESCENDING}, query=[], cursor={}):
         aggregate_query = []
         aggregate_query.extend(query)
         if fields:
