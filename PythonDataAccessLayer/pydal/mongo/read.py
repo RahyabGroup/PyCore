@@ -48,10 +48,10 @@ class ReadCommand:
             aggregate_query.append({"$skip": skip})
         if take:
             aggregate_query.append({"$limit": take})
-        documents = self._mongo_collection.aggregate(aggregate_query, useCursor=False)
+        documents = self._mongo_collection.aggregate(aggregate_query)
         return self._get_results(documents)
 
-    def aggregate_count(self, query=[], fields=[]):
+    def aggregate_count(self, query=[], fields=[], cursor={}):
         aggregate_query = []
         aggregate_query.extend(query)
         if fields:
@@ -59,7 +59,7 @@ class ReadCommand:
             aggregate_query.append({"$project": dict.fromkeys(fields, 1)})
         else:
             aggregate_query.append({"$project": {"_id": 1}})
-        documents = self._mongo_collection.aggregate(aggregate_query, useCursor=False)
+        documents = self._mongo_collection.aggregate(aggregate_query)
         return len(self._get_results(documents))
 
     def _get_results(self, documents):
